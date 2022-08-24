@@ -65,5 +65,4 @@ async function displayItems() {
         const renderedItem = renderItemContainer(item, handleDelete);
         shoppingListContainer.append(renderedItem);
     }
- 
 }
