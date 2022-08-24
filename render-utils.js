@@ -1,6 +1,7 @@
 export function renderItemContainer(item, quantity) {
     const container = document.createElement('div');
-    
+    container.classList.add('list-item');
+
     const listItem = document.createElement('p');
     listItem.classList.add('list-item');
     listItem.textContent = item.item;
