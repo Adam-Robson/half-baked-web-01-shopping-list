@@ -52,9 +52,9 @@ function checkError({ data, error }) {
 export async function getAllItems() {
     const response = await client
         .from('groceries')
-        .select('*');
+        .select();
     
-    checkError(response);
+    return checkError(response);
 }
 
 export async function addItem(item, quantity) {

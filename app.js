@@ -33,15 +33,10 @@ addButton.addEventListener('click', async () => {
 });
 
 async function loadPage() {
-    const response = await getAllItems();
-    if (response.error) {
-        //eslint-disable-next-line no-console
-        console.log(response.error.message);
-    } else {
-        response.data;
-        displayItems();
-    }
+    await getAllItems();
+    displayItems();
 }
+
 loadPage();
 
 
@@ -65,6 +60,7 @@ async function displayItems() {
     shoppingListContainer.innerHTML = '';
 
     const items = await getAllItems();
+
     for (let item of items) {
         const renderedItem = renderItemContainer(item, handleDelete);
         shoppingListContainer.append(renderedItem);
