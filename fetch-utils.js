@@ -73,3 +73,14 @@ export async function deleteItem(id) {
         .match({ id });
     return checkError(response);
 }
+
+export async function updateItem(id) {
+    const response = await client
+        .from('groceries')
+        .update([{ bought: true }])
+        .match({ id })
+        .single();
+    return checkError(response);
+}
+
+  

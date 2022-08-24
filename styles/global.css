@@ -66,24 +66,27 @@ footer {
     margin: 10px;
 }
 
-#list {
-    border: 1px black solid;
-    height: 470px;
-    max-width: 215px;
-    background:rgba(248, 255, 182, 0.857);
-    margin: 5px;
-}
-
 .list-item {
     display: flex;
     flex-direction: column;
 }
 
-.delete-button {
-    width: 22px;
+.delete-button, .done-button {
+    width: 72px;
     text-align: center;
 }
 
 #shopping-list-container {
     color: rgb(114, 63, 26);
+    border: 1px black solid;
+    height: 100%;
+    max-width: 300px;
+    background:rgba(248, 255, 182, 0.857);
+    margin: 5px;
+}
+
+.done-item {
+    width: 72px;
+    text-align: center;
+    text-decoration: line-through;
 }

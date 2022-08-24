@@ -1,4 +1,4 @@
-export function renderItemContainer(item, handleDelete) {
+export function renderItemContainer(item, handleDone, handleDelete) {
     const container = document.createElement('div');
     container.classList.add('list-item');
    
@@ -10,6 +10,21 @@ export function renderItemContainer(item, handleDelete) {
     quantityItem.classList.add('quantity');
     quantityItem.textContent = item.quantity;
 
+    //const boughtItem = document.createElement('p');
+    //boughtItem.classList.add('bought-item');
+
+
+    const doneButton = document.createElement('button');
+    if (item.bought === true) {
+        doneButton.classList.add('done-item');
+    } else {
+        doneButton.classList.add('done-button');
+    }
+    doneButton.textContent = 'done';
+    doneButton.addEventListener('click', () => {
+        handleDone(item);
+    });
+
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
     deleteButton.textContent = 'x';
@@ -18,7 +33,7 @@ export function renderItemContainer(item, handleDelete) {
         handleDelete(item);
     });
 
-    container.append(listItem, quantityItem, deleteButton);
+    container.append(listItem, quantityItem, doneButton, deleteButton);
 
     return container;
 }

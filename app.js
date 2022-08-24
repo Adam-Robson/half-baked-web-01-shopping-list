@@ -1,4 +1,4 @@
-import { checkAuth, signOutUser, addItem, deleteItem, getAllItems } from './fetch-utils.js';
+import { checkAuth, signOutUser, addItem, deleteItem, getAllItems, updateItem } from './fetch-utils.js';
 
 import { renderItemContainer } from './render-utils.js';
 // checking if we have a user! (will redirect to auth if not):
@@ -24,7 +24,7 @@ addButton.addEventListener('click', async () => {
         quantity: quantity,
     };
 
-    addItem(item.item, item.quantity);
+    await addItem(item.item, item.quantity);
  
     const newContainer = renderItemContainer(item, quantity);
     list.append(newContainer);
@@ -33,12 +33,21 @@ addButton.addEventListener('click', async () => {
 });
 
 async function loadPage() {
-    await getAllItems();
-    displayItems();
+    await displayItems();
 }
-
 loadPage();
 
+
+
+async function handleDone(item) {
+   
+    const message = `Mark this item as done?`;
+   
+    if (!confirm(message)) return;
+    await updateItem(item);
+    displayItems();
+
+}
 
 async function handleDelete(item) {
     const message = `Delete this item?`;
@@ -51,7 +60,6 @@ async function handleDelete(item) {
         if (index !== -1) {
             items.splice(index, 1);
         }
-        getAllItems();
         displayItems();
     }
 } 
@@ -62,7 +70,7 @@ async function displayItems() {
     const items = await getAllItems();
 
     for (let item of items) {
-        const renderedItem = renderItemContainer(item, handleDelete);
+        const renderedItem = renderItemContainer(item, handleDone, handleDelete);
         shoppingListContainer.append(renderedItem);
     }
 }
