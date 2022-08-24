@@ -78,3 +78,12 @@ footer {
     display: flex;
     flex-direction: column;
 }
+
+.delete-button {
+    width: 22px;
+    text-align: center;
+}
+
+#shopping-list-container {
+    color: rgb(114, 63, 26);
+}
