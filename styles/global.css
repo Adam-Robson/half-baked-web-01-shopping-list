@@ -1,6 +1,6 @@
 :root {
     --background: rgb(224, 234, 247);
-    --header-background: white;
+    --header-background: rgba(248, 255, 182, 0.857);
     --footer-background: rgb(243, 242, 242);
     --text-color: rgb(7, 5, 68);
     --label-color: rgb(75, 102, 98);
@@ -11,10 +11,10 @@
 
 body {
     height: 100vh;
-    font-family: 'Rubik', san-serif;
-    background: var(--background);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    background-image: url('/assets/yellow.jpg');
 }
 
 .page-header {
@@ -25,6 +25,8 @@ body {
     align-items: center;
     background-color: var(--header-background);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    opacity: 85%;
+    color:chocolate;
 }
 
 .page-header .title {
@@ -41,6 +43,9 @@ body {
 
 main {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+
 }
 
 footer {
@@ -51,4 +56,20 @@ footer {
     display: flex;
     justify-content: flex-end;
     background-color: var(--footer-background);
+}
+
+#quantity-input {
+    width: 40px;
+}
+
+.logo {
+    margin: 10px;
+}
+
+#list {
+    border: 1px black solid;
+    height: 470px;
+    max-width: 215px;
+    background:rgba(248, 255, 182, 0.857);
+    margin: 5px;
 }
