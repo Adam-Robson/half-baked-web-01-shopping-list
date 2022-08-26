@@ -4,7 +4,7 @@ export function renderItemContainer(item, handleDone, handleDelete) {
    
     const listItem = document.createElement('p');
     listItem.classList.add('list-item');
-    listItem.textContent = item.title;
+    listItem.textContent = item.item;
 
     const quantityItem = document.createElement('p');
     quantityItem.classList.add('quantity');

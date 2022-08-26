@@ -20,7 +20,7 @@ addButton.addEventListener('click', async () => {
     const input = listItemInput.value;
     const quantity = quantityInput.value;
     const item = {
-        title: input,
+        item: input,
         quantity: quantity,
         bought: false,
     };
