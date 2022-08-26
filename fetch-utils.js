@@ -57,12 +57,10 @@ export async function getAllItems() {
     return checkError(response);
 }
 
-export async function addItem(item, quantity) {
+export async function addItem(item) {
     const response = await client
         .from('groceries')
-        .insert([
-            { item, quantity }
-        ]);
+        .insert(item);
     return checkError(response);
 }
 
@@ -73,3 +71,14 @@ export async function deleteItem(id) {
         .match({ id });
     return checkError(response);
 }
+
+export async function updateItem(item, id) {
+    const response = await client
+        .from('groceries')
+        .update([{ bought: true }])
+        .match({ item, id })
+        .single();
+    return checkError(response);
+}
+
+  
