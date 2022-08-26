@@ -20,13 +20,14 @@ addButton.addEventListener('click', async () => {
     const input = listItemInput.value;
     const quantity = quantityInput.value;
     const item = {
-        item: input,
+        title: input,
         quantity: quantity,
+        bought: false,
     };
 
-    await addItem(item.item, item.quantity);
+    await addItem(item.id);
  
-    const newContainer = renderItemContainer(item, quantity);
+    const newContainer = renderItemContainer(item);
     list.append(newContainer);
     listItemInput.value = '';
     quantityInput.value = '';
@@ -37,16 +38,15 @@ async function loadPage() {
 }
 loadPage();
 
-
-
 async function handleDone(item) {
-   
-    const message = `Mark this item as done?`;
-   
-    if (!confirm(message)) return;
-    await updateItem(item);
-    displayItems();
+    item.bought === true;
+    const doneButton = document.querySelector('.done-button');
+    doneButton.classList.add('done-item');
+    doneButton.classList.remove('done-button');
+    doneButton.disabled = true;  
+    await updateItem(item.bought);
 
+    displayItems();
 }
 
 async function handleDelete(item) {
@@ -63,6 +63,7 @@ async function handleDelete(item) {
         displayItems();
     }
 } 
+
 
 async function displayItems() {
     shoppingListContainer.innerHTML = '';

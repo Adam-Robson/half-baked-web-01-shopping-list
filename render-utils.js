@@ -4,7 +4,7 @@ export function renderItemContainer(item, handleDone, handleDelete) {
    
     const listItem = document.createElement('p');
     listItem.classList.add('list-item');
-    listItem.textContent = item.item;
+    listItem.textContent = item.title;
 
     const quantityItem = document.createElement('p');
     quantityItem.classList.add('quantity');
@@ -12,19 +12,17 @@ export function renderItemContainer(item, handleDone, handleDelete) {
 
     //const boughtItem = document.createElement('p');
     //boughtItem.classList.add('bought-item');
-
-
     const doneButton = document.createElement('button');
-    if (item.bought === true) {
-        doneButton.classList.add('done-item');
-    } else {
+    if (item.bought === false) {
+        doneButton.textContent = 'done';
         doneButton.classList.add('done-button');
+        doneButton.addEventListener('click', () => {
+            handleDone(item);
+        });} else {
+        doneButton.textContent = 'done';
+        doneButton.classList.add('done-item');
     }
-    doneButton.textContent = 'done';
-    doneButton.addEventListener('click', () => {
-        handleDone(item);
-    });
-
+    
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
     deleteButton.textContent = 'x';
