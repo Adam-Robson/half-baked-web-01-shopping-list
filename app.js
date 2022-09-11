@@ -1,23 +1,77 @@
-// importing other stuff, utility functions for:
-// working with supabase:
-import { checkAuth, signOutUser } from './fetch-utils.js';
-// pure rendering (data --> DOM):
+import { checkAuth, signOutUser, addItem, deleteItem, getAllItems, updateItem } from './fetch-utils.js';
 
-/*  "boiler plate" auth code */
+import { renderItemContainer } from './render-utils.js';
 // checking if we have a user! (will redirect to auth if not):
 checkAuth();
 // can optionally return the user:
 // const user = checkAuth();
 
-// sign out link:
 const signOutLink = document.getElementById('sign-out-link');
 signOutLink.addEventListener('click', signOutUser);
-/* end "boiler plate auth code" */
 
-// grab needed DOM elements on page:
+const shoppingListContainer = document.getElementById('shopping-list-container');
+const listItemInput = document.getElementById('list-item-input'); 
+const quantityInput = document.getElementById('quantity-input');   
+const addButton = document.getElementById('add-button');
+const list = document.querySelector('#list');
 
-// local state:
+addButton.addEventListener('click', async () => {
+    list.textContent = '';
+    const input = listItemInput.value;
+    const quantity = quantityInput.value;
+    const item = {
+        item: input,
+        quantity: quantity,
+        bought: false,
+    };
 
-// display functions:
+    await addItem(item.id);
+ 
+    const newContainer = renderItemContainer(item);
+    list.append(newContainer);
+    listItemInput.value = '';
+    quantityInput.value = '';
+});
 
-// events:
+async function loadPage() {
+    await displayItems();
+}
+loadPage();
+
+async function handleDone(item) {
+    item.bought === true;
+    const doneButton = document.querySelector('.done-button');
+    doneButton.classList.add('done-item');
+    doneButton.classList.remove('done-button');
+    doneButton.disabled = true;  
+    await updateItem(item.bought);
+
+    displayItems();
+}
+
+async function handleDelete(item) {
+    const message = `Delete this item?`;
+    if (!confirm(message)) return;
+
+    const response = await deleteItem(item.id);
+    if (!response.error) {
+        const items = await getAllItems();
+        const index = items.indexOf(item);
+        if (index !== -1) {
+            items.splice(index, 1);
+        }
+        displayItems();
+    }
+} 
+
+
+async function displayItems() {
+    shoppingListContainer.innerHTML = '';
+
+    const items = await getAllItems();
+
+    for (let item of items) {
+        const renderedItem = renderItemContainer(item, handleDone, handleDelete);
+        shoppingListContainer.append(renderedItem);
+    }
+}

@@ -1,5 +1,5 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://fjidvhxajekcfrrjsnla.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqaWR2aHhhamVrY2ZycmpzbmxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjAxNDU2ODYsImV4cCI6MTk3NTcyMTY4Nn0._zi_gZoOt0ksKYa3J9htU9w6oH8ojf_WkKrLHWGaswo';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -42,4 +42,43 @@ export async function signOutUser() {
     return await client.auth.signOut();
 }
 
+function checkError({ data, error }) {
+    // eslint-disable-next-line
+    return error ? console.error(error) : data;
+}
+
 /* Data functions */
+
+export async function getAllItems() {
+    const response = await client
+        .from('groceries')
+        .select();
+    
+    return checkError(response);
+}
+
+export async function addItem(item) {
+    const response = await client
+        .from('groceries')
+        .insert(item);
+    return checkError(response);
+}
+
+export async function deleteItem(id) {
+    const response = await client
+        .from('groceries')
+        .delete()
+        .match({ id });
+    return checkError(response);
+}
+
+export async function updateItem(item, id) {
+    const response = await client
+        .from('groceries')
+        .update([{ bought: true }])
+        .match({ item, id })
+        .single();
+    return checkError(response);
+}
+
+  
