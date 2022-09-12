@@ -66,18 +66,36 @@ footer {
     margin: 10px;
 }
 
+.list-item-container {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    align-items:baseline;
+
+}
+
 .list-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    padding: 15px;
+    align-items:baseline;
+    text-align: center;
+    text-decoration: none;
 }
 
 .delete-button, .done-button {
-    width: 72px;
+    display: block;
+    height: auto;
+    width: max-content;
     text-align: center;
+    padding: 5px;
+    margin: 15px;
+
 }
 
 #shopping-list-container {
-    color: rgb(114, 63, 26);
+    display: flex;
+    flex-direction: column;
     border: 1px black solid;
     height: 100%;
     max-width: 300px;
@@ -86,8 +104,15 @@ footer {
 }
 
 .done-item {
-    width: 72px;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    align-items:baseline;
     text-align: center;
     text-decoration: line-through;
     
+}
+
+.quantity {
+    margin: 15px;
 }
