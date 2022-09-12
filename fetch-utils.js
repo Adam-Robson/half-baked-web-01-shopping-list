@@ -50,34 +50,24 @@ function checkError({ data, error }) {
 /* Data functions */
 
 export async function getAllItems() {
-    const response = await client
-        .from('groceries')
-        .select();
+    const response = await client.from('shopping').select();
     
     return checkError(response);
 }
 
-export async function addItem(item) {
-    const response = await client
-        .from('groceries')
-        .insert(item);
+export async function addItem(grocery) {
+    const response = await client.from('shopping').insert(grocery);
     return checkError(response);
 }
 
 export async function deleteItem(id) {
-    const response = await client
-        .from('groceries')
-        .delete()
-        .match({ id });
+    const response = await client.from('shopping').delete().match({ id });
     return checkError(response);
 }
 
-export async function updateItem(item, id) {
+export async function updateItem(id, bought) {
     const response = await client
-        .from('groceries')
-        .update([{ bought: true }])
-        .match({ item, id })
-        .single();
+        .from('shopping').update([{ bought: true }]).match({ id }).single();
     return checkError(response);
 }
 
