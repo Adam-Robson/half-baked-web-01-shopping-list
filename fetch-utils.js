@@ -64,7 +64,7 @@ export async function deleteItem(id) {
     const response = await client.from('shopping').delete().match({ id });
     return checkError(response);
 }
-
+/* eslint-disable */ 
 export async function updateItem(id, bought) {
     const response = await client
         .from('shopping').update([{ bought: true }]).match({ id }).single();
